@@ -66,6 +66,40 @@ class QuestionPage extends StatelessWidget {
     );
   }
 
+  Card buildQuestion(String question) {
+    return Card(
+      color: Colors.blue,
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          // gradient: const LinearGradient(
+          //   colors: [Colors.lightBlue, Colors.blue],
+          //   begin: Alignment.topLeft,
+          //   end: Alignment.bottomRight,
+          // ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            const SizedBox(height: 16),
+            Text(
+              question,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Column quizzWidget(BuildContext context, QuestionLoaded state) {
     String? imgPath = state.questionModel.imagePath ?? "images/question.jpg";
     return Column(
@@ -104,24 +138,7 @@ class QuestionPage extends StatelessWidget {
                 height: 300,
                 width: 300,
               ),
-
-              Container(
-                constraints: const BoxConstraints(minHeight: 100),
-                margin: const EdgeInsets.only(left: 30, top: 10, right: 30, bottom: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: const Color.fromRGBO(220, 220, 220, 1),
-                ),
-                child: Center(
-                  child: Text(
-                    state.questionModel.questionText.toString(),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-
+              buildQuestion(state.questionModel.questionText.toString()),
               Row( // pour les boutons
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
